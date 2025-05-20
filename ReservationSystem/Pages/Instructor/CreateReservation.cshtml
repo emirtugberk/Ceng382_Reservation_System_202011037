@@ -1,0 +1,65 @@
+@page
+@model ReservationSystem.Pages.Instructor.CreateReservationModel
+@{
+    ViewData["Title"] = "New Reservation";
+}
+
+<h2 class="mt-4">New Reservation</h2>
+
+<form method="post">
+  <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+  <div class="mb-3">
+    <label asp-for="Reservation.TermId" class="form-label"></label>
+    <select asp-for="Reservation.TermId"
+            asp-items="Model.Terms"
+            class="form-control"></select>
+    <span asp-validation-for="Reservation.TermId"
+          class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label asp-for="Reservation.Classroom" class="form-label"></label>
+    <select asp-for="Reservation.Classroom"
+            asp-items="Model.Classrooms"
+            class="form-control"></select>
+    <span asp-validation-for="Reservation.Classroom"
+          class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label asp-for="Reservation.DayOfWeek"
+           class="form-label"></label>
+    <select asp-for="Reservation.DayOfWeek"
+            asp-items="Model.DaysOfWeek"
+            class="form-control"></select>
+    <span asp-validation-for="Reservation.DayOfWeek"
+          class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label asp-for="Reservation.StartTime"
+           class="form-label"></label>
+    <select asp-for="Reservation.StartTime"
+            asp-items="Model.StartTimes"
+            class="form-control"></select>
+    <span asp-validation-for="Reservation.StartTime"
+          class="text-danger"></span>
+  </div>
+
+  <div class="mb-3">
+    <label asp-for="Reservation.EndTime"
+           class="form-label"></label>
+    <select asp-for="Reservation.EndTime"
+            asp-items="Model.EndTimes"
+            class="form-control"></select>
+    <span asp-validation-for="Reservation.EndTime"
+          class="text-danger"></span>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Reserve</button>
+</form>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,47 @@
+@page
+@model ReservationSystem.Pages.Admin.ReservationsModel
+@{
+    ViewData["Title"] = "Pending Reservations";
+}
+
+<h1>Pending Reservations</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Classroom</th>
+            <th>Term</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Requested By</th>
+            <th>Holiday</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model.PendingReservations)
+    {
+        var rowClass = Model.ConflictIds.Contains(r.Id) ? "table-warning" : "";
+        <tr class="@rowClass">
+            <td>@r.Classroom</td>
+            <td>@r.Term.Name</td>
+            <td>@r.DayOfWeek</td>
+            <td>@($"{r.StartTime:hh\\:mm} - {r.EndTime:hh\\:mm}")</td>
+            <td>@r.User.Username</td>
+            <td>
+                @if (r.IsHolidayWarning)
+                {
+                    <span class="text-warning">Tatil</span>
+                }
+            </td>
+            <td>
+                <form method="post" asp-page-handler="Approve" asp-route-id="@r.Id" style="display:inline">
+                    <button class="btn btn-sm btn-success">Approve</button>
+                </form>
+                <form method="post" asp-page-handler="Reject" asp-route-id="@r.Id" style="display:inline">
+                    <button class="btn btn-sm btn-danger">Reject</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

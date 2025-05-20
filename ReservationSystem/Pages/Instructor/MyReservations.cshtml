@@ -1,0 +1,31 @@
+@page
+@model ReservationSystem.Pages.Instructor.MyReservationsModel
+@{
+    ViewData["Title"] = "My Reservations";
+}
+
+<h2>My Reservations</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Classroom</th>
+      <th>Day</th>
+      <th>Time</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach (var r in Model.Reservations)
+  {
+      <tr>
+        <td>@r.Id</td>
+        <td>@r.Classroom</td>
+        <td>@r.DayOfWeek</td>
+        <td>@r.StartTime.ToString("hh\\:mm") – @r.EndTime.ToString("hh\\:mm")</td>
+        <td>@r.Status</td>
+      </tr>
+  }
+  </tbody>
+</table>

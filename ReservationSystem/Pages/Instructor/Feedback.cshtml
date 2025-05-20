@@ -1,0 +1,40 @@
+@page
+@model ReservationSystem.Pages.Instructor.FeedbackModel
+@{
+    ViewData["Title"] = "Give Feedback";
+}
+
+<h2>Geri Bildirim Gönder</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Feedback.ReservationId" class="form-label">Rezervasyon Seç</label>
+        <select asp-for="Feedback.ReservationId" class="form-select" asp-items="Model.ReservationList">
+            <option value="">-- Seçiniz --</option>
+        </select>
+        <span asp-validation-for="Feedback.ReservationId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Feedback.Rating" class="form-label">Puan (1–5)</label>
+        <input asp-for="Feedback.Rating" class="form-control" type="number" min="1" max="5" />
+        <span asp-validation-for="Feedback.Rating" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Feedback.Comment" class="form-label">Yorum</label>
+        <textarea asp-for="Feedback.Comment" class="form-control"></textarea>
+        <span asp-validation-for="Feedback.Comment" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gönder</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
